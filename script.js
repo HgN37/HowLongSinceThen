@@ -30,8 +30,9 @@ class timeGap{
         this.year = (parseInt(this.month/12));
     }
 }
-
+var intervalID = 0
 function buttonTimeClick(num){
+    clearInterval(interval)
     var event = document.getElementById('event' + num.toString()).value
     var date = document.getElementById('date' + num.toString()).value
     var time = document.getElementById('time' + num.toString()).value
@@ -44,7 +45,7 @@ function buttonTimeClick(num){
             $('#buttonEvent' + num.toString()).val("Untitle event No." + num.toString())
         }
         var gap = new timeGap(date + " " + time + ":00")
-        setInterval( () => {
+        intervalID = setInterval( () => {
             gap.getTimeGap()
             document.getElementById("gap_year" + num.toString()).innerHTML = gap.year + " Year(s)"
             document.getElementById("gap_month" + num.toString()).innerHTML = gap.month + " Month(s)"
@@ -56,8 +57,8 @@ function buttonTimeClick(num){
     }
 }
 
-let count = 0;
-let timeBlock = "<div class=\"box\" id=\"blockDefault\">\n<h4>\nEvent: <input type=\"text\" id=\"event\"><br><br>\nDate: <input type=\"date\" id=\"date\" required>\nTime: <input type=\"time\" id=\"time\" required><br><br>\n</h4>\n<button type=\"button\" id = \"buttonTime\" onclick=\"buttonTimeClick()\">Set time</button>\n<center>\n<h3 id = \"gap_year\"></h3>\n<h3 id = \"gap_month\"></h3>\n<h3 id = \"gap_day\"></h3>\n<h3 id = \"gap_hour\"></h3>\n<h3 id = \"gap_minute\"></h3>\n<h3 id = \"gap_second\"></h3>\n</center>\n</div><br>\n"
+var count = 0;
+var timeBlock = "<div class=\"box\" id=\"blockDefault\">\n<h4>\nEvent: <input type=\"text\" id=\"event\"><br><br>\nDate: <input type=\"date\" id=\"date\" required>\nTime: <input type=\"time\" id=\"time\" required><br><br>\n</h4>\n<button type=\"button\" id = \"buttonTime\" onclick=\"buttonTimeClick()\">Set time</button>\n<center>\n<h3 id = \"gap_year\"></h3>\n<h3 id = \"gap_month\"></h3>\n<h3 id = \"gap_day\"></h3>\n<h3 id = \"gap_hour\"></h3>\n<h3 id = \"gap_minute\"></h3>\n<h3 id = \"gap_second\"></h3>\n</center>\n</div><br>\n"
 function buttonAddClick() {
     $('#timeAll').append("<input type=\"button\" id=\"buttonEvent\" value=\"New event\">")
     $('#timeAll').append(timeBlock);
