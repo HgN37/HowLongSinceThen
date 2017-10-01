@@ -16,8 +16,8 @@ class timeGap{
     }
     getTimeGap(){
         this.updateCurrentTime();
-        var currentDate = moment(this.currentDateString,"YYYY/MM/DD HH:mm:ss")
-        var pastDate = moment(this.pastDateString,"YYYY/MM/DD HH:mm:ss")
+        var currentDate = moment(this.currentDateString,"YYYY/M/D H:m:s")
+        var pastDate = moment(this.pastDateString,"D MMMM, YYYY HH:mm:ss")
         var ms = currentDate.diff(pastDate);
         ms = (ms);
         this.second = (ms/1000);
@@ -41,8 +41,10 @@ function buttonTimeClick(num){
     } else{
         if(event != ""){
             $('#buttonEvent' + num.toString()).val(event)
+            $('#nameEvent' + num.toString()).text(event)
         }else{
             $('#buttonEvent' + num.toString()).val("Untitle event No." + num.toString())
+            $('#nameEvent' + num.toString()).text("Untitle event No." + num.toString())
         }
         var gap = new timeGap(date + " " + time + ":00")
         intervalID = setInterval( () => {
@@ -57,14 +59,48 @@ function buttonTimeClick(num){
     }
 }
 
-let count = 0;
-let timeBlock = "<div class=\"box\" id=\"blockDefault\">\n<h4>\nEvent: <input type=\"text\" id=\"event\"><br><br>\nDate: <input type=\"date\" id=\"date\" required>\nTime: <input type=\"time\" id=\"time\" required><br><br>\n</h4>\n<button type=\"button\" class=\"buttonFunc\" id = \"buttonTime\" onclick=\"buttonTimeClick()\">Set time</button>\n<center>\n<h3 id = \"gap_year\"></h3>\n<h3 id = \"gap_month\"></h3>\n<h3 id = \"gap_day\"></h3>\n<h3 id = \"gap_hour\"></h3>\n<h3 id = \"gap_minute\"></h3>\n<h3 id = \"gap_second\"></h3>\n</center>\n<br></div>\n"
+var count = 0;
+var block = "<div id=\"buttonBlock\">\n\
+<br><input type=\"button\" class=\"waves-effect waves-light btn blue\" id=\"buttonEvent\" value=\"New event\"> \n\
+<input type=\"button\" class=\"waves-effect waves-light btn blue\" id=\"buttonDel\" value=\"Del\">\n\
+<br>\n\
+</div>\n\
+<div id=\"blockDefault\" class=\"row\">\n\
+    <div class=\"col s6\">\n\
+        <div class=\"row\">\n\
+            <div class=\"input-field col s12\">\n\
+                <input id=\"event\" type=\"text\" class=\"validate\">\n\
+                <label for=\"event\">Event name</label>\n\
+            </div>\n\
+            <div class=\"col s12\">\n\
+                <label for=\"date\">Date</label>\n\
+                <input id=\"date\" type=\"text\" class=\"datepicker\">\n\
+            </div>\n\
+            <div class=\"col s12\">\n\
+                <label for=\"time\">Time</label>\n\
+                <input id=\"time\" type=\"text\" class=\"timepicker\">\n\
+            </div>\n\
+        </div>\n\
+        <input type=\"button\" class=\"waves-effect waves-light btn blue\" id=\"buttonTime\" value=\"Set time\"> \n\
+    </div>\n\
+    <div class=\"col s6\">\n\
+        <p id = \"gap_year\"></p>\n\
+        <p id = \"gap_month\"></p>\n\
+        <p id = \"gap_day\"></p>\n\
+        <p id = \"gap_hour\"></p>\n\
+        <p id = \"gap_minute\"></p>\n\
+        <p id = \"gap_second\"></p>\n\
+    </div>\n\
+</div>\n\
+"
 function buttonAddClick() {
-    $('#timeAll').append("<input type=\"button\" class=\"button\" id=\"buttonEvent\" value=\"New event\"> <input type=\"button\" class=\"buttonDel\" id=\"buttonDel\" value=\"Del\">")
-    $('#timeAll').append(timeBlock);
+    $('#timeAll').append(block);
+    
     /* Just hide it */
     $('#blockDefault').hide(0)
+    $('#blockDefault').show(300)
     /* Create new id */
+    var newButtonBlock = '#buttonBlock' + count.toString()
     var newBlock = '#block' + count.toString()
     var newButtonEvent = '#buttonEvent' + count.toString()
     var newEvent = '#event' + count.toString()
@@ -79,6 +115,8 @@ function buttonAddClick() {
     var newGapMinute = '#gap_minute' + count.toString()
     var newGapSecond = '#gap_second' + count.toString()
     /* Change all id */
+    $('#nameEvent').attr('id', 'nameEvent' + count.toString())
+    $('#buttonBlock').attr('id', 'buttonBlock' + count.toString())
     $('#blockDefault').attr('id', 'block' + count.toString())
     $('#buttonEvent').attr('id', 'buttonEvent' + count.toString())
     $('#buttonDel').attr('id', 'buttonDel' + count.toString())
@@ -95,14 +133,33 @@ function buttonAddClick() {
     $('#gap_second').attr('id', 'gap_second' + count.toString())
     /* Event button setup */
     $(newButtonEvent).on('click', () => {
-        $(newBlock).slideToggle(200)
+        $(newBlock).toggle(500)
     })
     $(newButtonDel).on('click', () => {
         $(newBlock).remove()
-        $(newButtonEvent).remove()
-        $(newButtonDel).remove()
+        $(newButtonBlock).remove()
         clearInterval(intervalID)
         intervalID = null
     })
+    $('.datepicker').pickadate({
+        selectMonths: true, // Creates a dropdown to control month
+        selectYears: 500, // Creates a dropdown of 15 years to control year,
+        today: 'Today',
+        clear: 'Clear',
+        close: 'Ok',
+        closeOnSelect: false // Close upon selecting a date,
+    });
+    
+    $('.timepicker').pickatime({
+        default: 'now', // Set default time: 'now', '1:30AM', '16:30'
+        fromnow: 0,       // set default time to * milliseconds from now (using with default = 'now')
+        twelvehour: false, // Use AM/PM or 24-hour format
+        donetext: 'OK', // text for done-button
+        cleartext: 'Clear', // text for clear-button
+        canceltext: 'Cancel', // Text for cancel-button
+        autoclose: false, // automatic close timepicker
+        ampmclickable: true, // make AM PM clickable
+        aftershow: function(){} //Function for after opening timepicker
+    });
     count++;
 }

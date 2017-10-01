@@ -3,76 +3,28 @@
 }
 
 body {
-    margin-left: 5%;
+    margin-left: 3%;
+    margin-right: 3%;
 }
 
-h1 {
-    color: #0D56E9;
-    font-family: "Tiempos Text";
-    font-size: 32px;
-    letter-spacing: .2em;
+.taskbutton {
+    width: 90%;
+}
+
+.mybutton {
     margin-bottom: 1em;
     margin-top: 1em;
 }
 
-.buttonFunc{
-    background-color: #0CC412;
+.demo-card-wide.mdl-card {
+    width: 75%;
+}
+.demo-card-wide > .mdl-card__title {
     color: #FFFFFF;
-    padding: 15px 32px;
-    text-align: center;
-    font-size: 18px;
-    display: -ms-inline-grid;
+    font-size: 20px;
+    height: 176px;
+    background: url('http://images.nationalgeographic.com/wpf/media-live/photos/000/762/custom/panda-trees-woods-990-dl_76256_990x557.jpg') center / cover;
 }
-
-.buttonDel {
-    background-color: #FFFFFF; /* Green */
-    border: 2px solid #3531F8;
-    width: 15%;
-    padding: 15px;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    color: #000000;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 12px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-}
-
-.buttonDel:hover{
-    background-color: #3531F8; /* Green */
-    color: white;
-}
-
-.button{
-    background-color: #FFFFFF; /* Green */
-    border: 2px solid #3531F8;
-    margin-top: 10px;
-    margin-bottom: 10px;
-    width: 80%;
-    color: #000000;
-    padding: 15px 32px;
-    text-align: left;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 18px;
-    border-radius: 12px;
-    -webkit-transition-duration: 0.4s;
-    transition-duration: 0.4s;
-}
-
-.button:hover{
-    background-color: #3531F8; /* Green */
-    color: white;
-}
-
-.box{
-    margin-top: 10px;
-    margin-bottom: 10px;
-    padding:12px;
-    border:2px solid #666;
-    width:95%;
-    height:500px;
+.demo-card-wide > .mdl-card__menu {
+    color: #fff;
 }
