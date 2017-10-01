@@ -30,9 +30,12 @@ class timeGap{
         this.year = (parseInt(this.month/12));
     }
 }
+var intervalJSON = JSON
 var intervalID
 function buttonTimeClick(num){
-    clearInterval(intervalID)
+    if(intervalJSON[num.toString()] != null){
+        clearInterval(intervalJSON[num.toString()])
+    }
     var event = document.getElementById('event' + num.toString()).value
     var date = document.getElementById('date' + num.toString()).value
     var time = document.getElementById('time' + num.toString()).value
@@ -56,6 +59,7 @@ function buttonTimeClick(num){
             document.getElementById("gap_minute" + num.toString()).innerHTML = gap.minute + " Minute(s)"
             document.getElementById("gap_second" + num.toString()).innerHTML = gap.second + " Second(s)"
         }, 100)
+        intervalJSON[num.toString()] = intervalID
     }
 }
 
