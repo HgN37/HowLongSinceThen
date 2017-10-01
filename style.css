@@ -1,7 +1,78 @@
-h1, h2, h3 {
-    color: #36C;
-    font-weight: normal;
-    letter-spacing: .4em;
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin-left: 5%;
+}
+
+h1 {
+    color: #0D56E9;
+    font-family: "Tiempos Text";
+    font-size: 32px;
+    letter-spacing: .2em;
     margin-bottom: 1em;
-    text-transform: lowercase;
- }
+    margin-top: 1em;
+}
+
+.buttonFunc{
+    background-color: #0CC412;
+    color: #FFFFFF;
+    padding: 15px 32px;
+    text-align: center;
+    font-size: 18px;
+    display: -ms-inline-grid;
+}
+
+.buttonDel {
+    background-color: #FFFFFF; /* Green */
+    border: 2px solid #3531F8;
+    width: 15%;
+    padding: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    color: #000000;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.buttonDel:hover{
+    background-color: #3531F8; /* Green */
+    color: white;
+}
+
+.button{
+    background-color: #FFFFFF; /* Green */
+    border: 2px solid #3531F8;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    width: 80%;
+    color: #000000;
+    padding: 15px 32px;
+    text-align: left;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 18px;
+    border-radius: 12px;
+    -webkit-transition-duration: 0.4s;
+    transition-duration: 0.4s;
+}
+
+.button:hover{
+    background-color: #3531F8; /* Green */
+    color: white;
+}
+
+.box{
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding:12px;
+    border:2px solid #666;
+    width:95%;
+    height:500px;
+}

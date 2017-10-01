@@ -30,9 +30,9 @@ class timeGap{
         this.year = (parseInt(this.month/12));
     }
 }
-var intervalID = 0
+var intervalID
 function buttonTimeClick(num){
-    clearInterval(interval)
+    clearInterval(intervalID)
     var event = document.getElementById('event' + num.toString()).value
     var date = document.getElementById('date' + num.toString()).value
     var time = document.getElementById('time' + num.toString()).value
@@ -57,10 +57,10 @@ function buttonTimeClick(num){
     }
 }
 
-var count = 0;
-var timeBlock = "<div class=\"box\" id=\"blockDefault\">\n<h4>\nEvent: <input type=\"text\" id=\"event\"><br><br>\nDate: <input type=\"date\" id=\"date\" required>\nTime: <input type=\"time\" id=\"time\" required><br><br>\n</h4>\n<button type=\"button\" id = \"buttonTime\" onclick=\"buttonTimeClick()\">Set time</button>\n<center>\n<h3 id = \"gap_year\"></h3>\n<h3 id = \"gap_month\"></h3>\n<h3 id = \"gap_day\"></h3>\n<h3 id = \"gap_hour\"></h3>\n<h3 id = \"gap_minute\"></h3>\n<h3 id = \"gap_second\"></h3>\n</center>\n</div><br>\n"
+let count = 0;
+let timeBlock = "<div class=\"box\" id=\"blockDefault\">\n<h4>\nEvent: <input type=\"text\" id=\"event\"><br><br>\nDate: <input type=\"date\" id=\"date\" required>\nTime: <input type=\"time\" id=\"time\" required><br><br>\n</h4>\n<button type=\"button\" class=\"buttonFunc\" id = \"buttonTime\" onclick=\"buttonTimeClick()\">Set time</button>\n<center>\n<h3 id = \"gap_year\"></h3>\n<h3 id = \"gap_month\"></h3>\n<h3 id = \"gap_day\"></h3>\n<h3 id = \"gap_hour\"></h3>\n<h3 id = \"gap_minute\"></h3>\n<h3 id = \"gap_second\"></h3>\n</center>\n<br></div>\n"
 function buttonAddClick() {
-    $('#timeAll').append("<input type=\"button\" id=\"buttonEvent\" value=\"New event\">")
+    $('#timeAll').append("<input type=\"button\" class=\"button\" id=\"buttonEvent\" value=\"New event\"> <input type=\"button\" class=\"buttonDel\" id=\"buttonDel\" value=\"Del\">")
     $('#timeAll').append(timeBlock);
     /* Just hide it */
     $('#blockDefault').hide(0)
@@ -71,6 +71,7 @@ function buttonAddClick() {
     var newDate = '#date' + count.toString()
     var newTime = '#time' + count.toString()
     var newButtonTime = '#buttonTime' + count.toString()
+    var newButtonDel = '#buttonDel' + count.toString()
     var newGapYear = '#gap_year' + count.toString()
     var newGapMonth = '#gap_month' + count.toString()
     var newGapDay = '#gap_day' + count.toString()
@@ -80,6 +81,7 @@ function buttonAddClick() {
     /* Change all id */
     $('#blockDefault').attr('id', 'block' + count.toString())
     $('#buttonEvent').attr('id', 'buttonEvent' + count.toString())
+    $('#buttonDel').attr('id', 'buttonDel' + count.toString())
     $('#event').attr('id', 'event' + count.toString())
     $('#date').attr('id', 'date' + count.toString())
     $('#time').attr('id', 'time' + count.toString())
@@ -93,7 +95,14 @@ function buttonAddClick() {
     $('#gap_second').attr('id', 'gap_second' + count.toString())
     /* Event button setup */
     $(newButtonEvent).on('click', () => {
-        $(newBlock).toggle(200)
+        $(newBlock).slideToggle(200)
+    })
+    $(newButtonDel).on('click', () => {
+        $(newBlock).remove()
+        $(newButtonEvent).remove()
+        $(newButtonDel).remove()
+        clearInterval(intervalID)
+        intervalID = null
     })
     count++;
 }
