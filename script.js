@@ -1,5 +1,3 @@
-var moment = require('moment');
-var $ = require('jquery')
 
 class timeGap{
     constructor(pastString){
@@ -52,59 +50,34 @@ function buttonTimeClick(num){
         var gap = new timeGap(date + " " + time + ":00")
         intervalID = setInterval( () => {
             gap.getTimeGap()
-            document.getElementById("gap_year" + num.toString()).innerHTML = gap.year + " Year(s)"
-            document.getElementById("gap_month" + num.toString()).innerHTML = gap.month + " Month(s)"
-            document.getElementById("gap_day" + num.toString()).innerHTML = gap.day + " Day(s)"
-            document.getElementById("gap_hour" + num.toString()).innerHTML = gap.hour + " Hour(s)"
-            document.getElementById("gap_minute" + num.toString()).innerHTML = gap.minute + " Minute(s)"
-            document.getElementById("gap_second" + num.toString()).innerHTML = gap.second + " Second(s)"
+            document.getElementById("gap_year" + num.toString()).innerHTML = gap.year
+            document.getElementById("gap_month" + num.toString()).innerHTML = gap.month
+            document.getElementById("gap_day" + num.toString()).innerHTML = gap.day
+            document.getElementById("gap_hour" + num.toString()).innerHTML = gap.hour
+            document.getElementById("gap_minute" + num.toString()).innerHTML = gap.minute
+            document.getElementById("gap_second" + num.toString()).innerHTML = gap.second
         }, 100)
         intervalJSON[num.toString()] = intervalID
     }
 }
 
 var count = 0;
-var block = "<div id=\"buttonBlock\">\n\
-<br><input type=\"button\" class=\"waves-effect waves-light btn blue\" id=\"buttonEvent\" value=\"New event\"> \n\
-<input type=\"button\" class=\"waves-effect waves-light btn blue\" id=\"buttonDel\" value=\"Del\">\n\
-<br>\n\
-</div>\n\
-<div id=\"blockDefault\" class=\"row\">\n\
-    <div class=\"col s6\">\n\
-        <div class=\"row\">\n\
-            <div class=\"input-field col s12\">\n\
-                <input id=\"event\" type=\"text\" class=\"validate\">\n\
-                <label for=\"event\">Event name</label>\n\
-            </div>\n\
-            <div class=\"col s12\">\n\
-                <label for=\"date\">Date</label>\n\
-                <input id=\"date\" type=\"text\" class=\"datepicker\">\n\
-            </div>\n\
-            <div class=\"col s12\">\n\
-                <label for=\"time\">Time</label>\n\
-                <input id=\"time\" type=\"text\" class=\"timepicker\">\n\
-            </div>\n\
-        </div>\n\
-        <input type=\"button\" class=\"waves-effect waves-light btn blue\" id=\"buttonTime\" value=\"Set time\"> \n\
-    </div>\n\
-    <div class=\"col s6\">\n\
-        <p id = \"gap_year\"></p>\n\
-        <p id = \"gap_month\"></p>\n\
-        <p id = \"gap_day\"></p>\n\
-        <p id = \"gap_hour\"></p>\n\
-        <p id = \"gap_minute\"></p>\n\
-        <p id = \"gap_second\"></p>\n\
-    </div>\n\
-</div>\n\
-"
 function buttonAddClick() {
-    $('#timeAll').append(block);
-    
+    /* Just append a block */
+    $.ajax({
+        async: false,
+        type: 'GET',
+        url: 'timeblock.html',
+        success: function(data) {
+            $('#timeAll').append(data)
+        }
+    });
     /* Just hide it */
-    $('#blockDefault').hide(0)
-    $('#blockDefault').show(300)
+    $('#section').hide(0)
+    $('#section').show(500)
     /* Create new id */
-    var newButtonBlock = '#buttonBlock' + count.toString()
+    var newSection = '#section' + count.toString()
+    var newblockButton = '#blockButton' + count.toString()
     var newBlock = '#block' + count.toString()
     var newButtonEvent = '#buttonEvent' + count.toString()
     var newEvent = '#event' + count.toString()
@@ -119,9 +92,10 @@ function buttonAddClick() {
     var newGapMinute = '#gap_minute' + count.toString()
     var newGapSecond = '#gap_second' + count.toString()
     /* Change all id */
+    $('#section').attr('id', 'section' + count.toString())
     $('#nameEvent').attr('id', 'nameEvent' + count.toString())
-    $('#buttonBlock').attr('id', 'buttonBlock' + count.toString())
-    $('#blockDefault').attr('id', 'block' + count.toString())
+    $('#blockButton').attr('id', 'blockButton' + count.toString())
+    $('#blockTime').attr('id', 'block' + count.toString())
     $('#buttonEvent').attr('id', 'buttonEvent' + count.toString())
     $('#buttonDel').attr('id', 'buttonDel' + count.toString())
     $('#event').attr('id', 'event' + count.toString())
@@ -140,10 +114,8 @@ function buttonAddClick() {
         $(newBlock).toggle(500)
     })
     $(newButtonDel).on('click', () => {
-        $(newBlock).remove()
-        $(newButtonBlock).remove()
-        clearInterval(intervalID)
-        intervalID = null
+        $(newSection).remove()
+        // TODO: Clear interval here
     })
     $('.datepicker').pickadate({
         selectMonths: true, // Creates a dropdown to control month

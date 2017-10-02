@@ -1,30 +1,9 @@
-* {
-    box-sizing: border-box;
-}
-
 body {
-    margin-left: 3%;
-    margin-right: 3%;
+    display: flex;
+    min-height: 100vh;
+    flex-direction: column;
 }
 
-.taskbutton {
-    width: 90%;
-}
-
-.mybutton {
-    margin-bottom: 1em;
-    margin-top: 1em;
-}
-
-.demo-card-wide.mdl-card {
-    width: 75%;
-}
-.demo-card-wide > .mdl-card__title {
-    color: #FFFFFF;
-    font-size: 20px;
-    height: 176px;
-    background: url('http://images.nationalgeographic.com/wpf/media-live/photos/000/762/custom/panda-trees-woods-990-dl_76256_990x557.jpg') center / cover;
-}
-.demo-card-wide > .mdl-card__menu {
-    color: #fff;
+main {
+    flex: 1 0 auto;
 }
