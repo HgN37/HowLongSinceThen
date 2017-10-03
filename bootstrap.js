@@ -7,7 +7,7 @@ require('electron-debug')({showDevTools: true});
 let win = null
 
 function createWindow() {
-    win = new BrowserWindow({width:600, height:800})
+    win = new BrowserWindow({width:1200, height:1000})
     win.loadURL(url.format({
         pathname: path.join(__dirname, 'index.html'),
         protocol: 'file:',
