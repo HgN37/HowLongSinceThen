@@ -139,30 +139,3 @@ function buttonAddClick() {
     });
     count++;
 }
-
-$(document).ready( () => {
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'tabs/howlong.html',
-        success: function(data) {
-            $('#main').append(data)
-        }
-    });
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'tabs/kanban.html',
-        success: function(data) {
-            $('#main').append(data)
-        }
-    });
-    $.ajax({
-        async: false,
-        type: 'GET',
-        url: 'tabs/pomodoro.html',
-        success: function(data) {
-            $('#main').append(data)
-        }
-    });
-})
