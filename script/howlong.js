@@ -1,3 +1,5 @@
+const moment = require('moment')
+const $ = require('jquery')
 
 class timeGap{
     constructor(pastString){

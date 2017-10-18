@@ -6,9 +6,18 @@ I never use JavaScript, HTML and CSS before so my code may be really bad. Beside
 
 Sorry for my bad English.
 
+## Web version
+I don't develop web version anymore (not enought time and server problem). But if you want a peak into this app, you can visit [HowLongSinceThen Web](http://cretacam.ddns.net/nguyen).
+
 ## Usage
 Set your time in the past, then click the button.
+
+## Dependency
+* [Electron](https://electron.atom.io/)
+* [Moment](https://momentjs.com/)
+* [Jquery](https://jquery.com/)
 
 ## TODO
 * Improve user interface.
 * Add random quotes/facts about time.
+* Fix interval problem.
